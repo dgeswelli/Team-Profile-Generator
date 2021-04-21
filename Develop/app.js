@@ -10,6 +10,69 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const teamMembers = []
+const idArray = []
+
+function menu() {
+    function createManager() {
+        inquirer.prompt ([
+            {
+                type: "input",
+                name: "managerName",
+                message: "Enter Manager's Name",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Response Required!";
+                },
+            },
+            {
+                type: "input",
+                name: "managerId",
+                message: "Enter Manager ID",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Integer response required!";
+                },
+            },
+            {
+                type: "input",
+                name: "managerEmail",
+                message: "Enter Manager's Email",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Email Address Required!";
+                },
+            },
+            {
+                type: "input",
+                name:"officeNumber",
+                message:"Enter Manager's Office Number",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Office Number Required!"
+                },
+            },
+        ])
+        .then(function (managerData) {
+            var createManager = new Manager(
+                managerData.managerName,
+                managerData.managerId,
+                managerData.managerEmail,
+                managerData.officeNumber);
+                teamMembers.push(createManager);
+
+            });
+    }
+}
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
