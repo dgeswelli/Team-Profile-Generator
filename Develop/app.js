@@ -11,14 +11,13 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 const teamMembers = []
-const idArray = []
 
 function menu() {
     function createManager() {
         inquirer.prompt ([
             {
                 type: "input",
-                name: "managerName",
+                name: "name",
                 message: "Enter Manager's Name",
                 validate: (answer) => {
                     if (answer !== "" ) {
@@ -29,7 +28,7 @@ function menu() {
             },
             {
                 type: "input",
-                name: "managerId",
+                name: "id",
                 message: "Enter Manager ID",
                 validate: (answer) => {
                     if (answer !== "" ) {
@@ -40,7 +39,7 @@ function menu() {
             },
             {
                 type: "input",
-                name: "managerEmail",
+                name: "email",
                 message: "Enter Manager's Email",
                 validate: (answer) => {
                     if (answer !== "" ) {
@@ -63,14 +62,129 @@ function menu() {
         ])
         .then(function (managerData) {
             var createManager = new Manager(
-                managerData.managerName,
-                managerData.managerId,
-                managerData.managerEmail,
+                managerData.name,
+                managerData.id,
+                managerData.email,
                 managerData.officeNumber);
                 teamMembers.push(createManager);
 
-            });
+            })
     }
+    function createEngineer() {
+        inquirer.prompt ([
+            {
+                type: "input",
+                name: "name",
+                message: "Enter Engineer's Name",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Response Required!";
+                },
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "Enter Engineer's ID",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Integer response required!";
+                },
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "Enter Engineer's Email",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Email Address Required!";
+                },
+            },
+            {
+                type: "input",
+                name:"github",
+                message:"Enter Engineer's Github",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Github required!"
+                },
+            },
+        ])
+        .then(function (engineerData) {
+            var createEngineer = new Engineer(
+                engineerData.name,
+                engineerData.id,
+                engineerData.email,
+                engineerData.github);
+                teamMembers.push(createEngineer);
+
+            })
+    }
+    function createIntern() {
+        inquirer.prompt ([
+            {
+                type: "input",
+                name: "name",
+                message: "Enter Intern's Name",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Response Required!";
+                },
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "Enter Intern's ID",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Integer response required!";
+                },
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "Enter Intern's Email",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "Email Address Required!";
+                },
+            },
+            {
+                type: "input",
+                name:"school",
+                message:"Enter Intern's School",
+                validate: (answer) => {
+                    if (answer !== "" ) {
+                        return true;
+                    }
+                    return "School required!"
+                },
+            },
+        ])
+        .then(function (internData) {
+            var createIntern = new Intern(
+                internData.name,
+                internData.id,
+                internData.email,
+                internData.school);
+                teamMembers.push(createIntern);
+
+            })
+    }
+
 }
 
 
