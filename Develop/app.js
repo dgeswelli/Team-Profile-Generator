@@ -12,6 +12,10 @@ const render = require("./lib/htmlRenderer");
 
 const teamMembers = []
 
+const createTeam = () => {
+    fs.writeFileSync(outputPath, render(teamMembers))
+};
+
 function menu() {
     function createManager() {
         inquirer.prompt ([
@@ -29,7 +33,7 @@ function menu() {
             {
                 type: "input",
                 name: "id",
-                message: "Enter Manager ID",
+                message: "Enter Manager's ID",
                 validate: (answer) => {
                     if (answer !== "" ) {
                         return true;
@@ -67,6 +71,9 @@ function menu() {
                 managerData.email,
                 managerData.officeNumber);
                 teamMembers.push(createManager);
+                if (createManager = true) {
+                    createEngineer();
+                }
 
             })
     }
@@ -124,6 +131,9 @@ function menu() {
                 engineerData.email,
                 engineerData.github);
                 teamMembers.push(createEngineer);
+                if (createEngineer = true) {
+                    createIntern();
+                }
 
             })
     }
@@ -181,11 +191,18 @@ function menu() {
                 internData.email,
                 internData.school);
                 teamMembers.push(createIntern);
+                if (createIntern = true) {
+                    createTeam();
+                }
 
             })
     }
 
+    createManager();
+
 }
+
+menu();
 
 
 // Write code to use inquirer to gather information about the development team members,
